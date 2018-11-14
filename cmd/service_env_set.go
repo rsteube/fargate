@@ -45,6 +45,8 @@ At least one environment variable must be specified via the --env flag. Specify
 func init() {
 	serviceEnvSetCmd.Flags().StringSliceVarP(&flagServiceEnvSetEnvVars, "env", "e", []string{}, "Environment variables to set [e.g. KEY=value]")
 
+	serviceEnvSetCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
+
 	serviceEnvCmd.AddCommand(serviceEnvSetCmd)
 }
 

@@ -47,6 +47,8 @@ var flagServiceEnvUnsetKeys []string
 func init() {
 	serviceEnvUnsetCmd.Flags().StringSliceVarP(&flagServiceEnvUnsetKeys, "key", "k", []string{}, "Environment variable keys to unset [e.g. KEY, NGINX_PORT]")
 
+	serviceEnvUnsetCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
+
 	serviceEnvCmd.AddCommand(serviceEnvUnsetCmd)
 }
 

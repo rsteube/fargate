@@ -29,6 +29,7 @@ for example.`,
 }
 
 func init() {
+	serviceRestartCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceRestartCmd)
 }
 

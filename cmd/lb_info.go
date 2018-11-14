@@ -32,6 +32,7 @@ var lbInfoCmd = &cobra.Command{
 }
 
 func init() {
+	lbInfoCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
 	lbCmd.AddCommand(lbInfoCmd)
 }
 

@@ -26,6 +26,7 @@ var loadBalancerDestroyCmd = &cobra.Command{
 }
 
 func init() {
+	loadBalancerDestroyCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
 	lbCmd.AddCommand(loadBalancerDestroyCmd)
 }
 

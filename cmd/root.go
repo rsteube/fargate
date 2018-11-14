@@ -163,6 +163,7 @@ CloudWatch Logs, and Amazon Route 53 into an easy-to-use CLI.`,
 			}
 		}
 	},
+	BashCompletionFunction: bashCompletionFunction,
 }
 
 func Execute() {
@@ -175,6 +176,10 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&region, "region", "", `AWS region (default "us-east-1")`)
 	rootCmd.PersistentFlags().BoolVar(&noColor, "no-color", false, "Disable color output")
 	rootCmd.PersistentFlags().StringVar(&clusterName, "cluster", "", `ECS cluster name (default "fargate")`)
+
+	// TODO not yet rendered
+	rootCmd.MarkPFlagCustom("region", "__fargate_completion_region")
+	rootCmd.MarkPFlagCustom("cluster", "__fargate_completion_cluster")
 
 	if runtime.GOOS == runtimeMacOS {
 		rootCmd.PersistentFlags().BoolVar(&noEmoji, "no-emoji", false, "Disable emoji output")

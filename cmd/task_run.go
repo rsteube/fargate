@@ -134,6 +134,15 @@ func init() {
 	taskRunCmd.Flags().StringSliceVar(&flagTaskRunSecurityGroupIds, "security-group-id", []string{}, "ID of a security group to apply to the task (can be specified multiple times)")
 	taskRunCmd.Flags().StringSliceVar(&flagTaskRunSubnetIds, "subnet-id", []string{}, "ID of a subnet in which to place the task (can be specified multiple times)")
 	taskRunCmd.Flags().StringVarP(&flagTaskRunTaskRole, "task-role", "", "", "Name or ARN of an IAM role that the tasks can assume")
+
+	taskRunCmd.MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	taskRunCmd.MarkFlagCustom("image", "__fargate_completion_image")
+	taskRunCmd.MarkFlagCustom("memory", "__fargate_completion_memory")
+	taskRunCmd.MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	taskRunCmd.MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+	taskRunCmd.MarkFlagCustom("task-role", "__fargate_completion_role")
+
+	taskRunCmd.MarkZshCompPositionalArgumentCustom(1, "()")
 	taskCmd.AddCommand(taskRunCmd)
 }
 

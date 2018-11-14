@@ -43,6 +43,7 @@ update to configuration such a CPU, memory, or environment variables.`,
 }
 
 func init() {
+	serviceInfoCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceInfoCmd)
 }
 

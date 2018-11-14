@@ -86,5 +86,6 @@ func init() {
 	certificateRequestCmd.Flags().StringSliceVarP(&certificateRequestFlags.aliases, "alias", "a", []string{},
 		`Additional domain names to be included in the certificate (can be specified multiple times)`)
 
+	certificateRequestCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_zone")
 	certificateCmd.AddCommand(certificateRequestCmd)
 }

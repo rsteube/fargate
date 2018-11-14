@@ -263,6 +263,18 @@ func init() {
 	serviceCreateCmd.Flags().StringSliceVar(&flagServiceCreateSubnetIds, "subnet-id", []string{}, "ID of a subnet in which to place the service (can be specified multiple times)")
 	serviceCreateCmd.Flags().StringVarP(&flagServiceCreateTaskRole, "task-role", "", "", "Name or ARN of an IAM role that the service's tasks can assume")
 
+	serviceCreateCmd.MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	serviceCreateCmd.MarkFlagCustom("memory", "__fargate_completion_memory")
+	serviceCreateCmd.MarkFlagCustom("port", "__fargate_completion_port")
+	serviceCreateCmd.MarkFlagCustom("image", "__fargate_completion_image")
+	serviceCreateCmd.MarkFlagCustom("lb", "__fargate_completion_loadbalancer")
+	serviceCreateCmd.MarkFlagCustom("rule", "(host= path=)")
+	serviceCreateCmd.MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	serviceCreateCmd.MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+	serviceCreateCmd.MarkFlagCustom("task-role", "__fargate_completion_role")
+
+	serviceCreateCmd.MarkZshCompPositionalArgumentCustom(1, "()")
+
 	serviceCmd.AddCommand(serviceCreateCmd)
 }
 

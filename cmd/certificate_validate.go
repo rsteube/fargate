@@ -97,5 +97,6 @@ created to complete validation and issue the certificate.`,
 }
 
 func init() {
+	certificateValidateCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateValidateCmd)
 }

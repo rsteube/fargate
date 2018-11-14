@@ -66,6 +66,8 @@ specified with a sign such as +5 or -2.`,
 }
 
 func init() {
+	serviceScaleCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
+	serviceScaleCmd.MarkZshCompPositionalArgumentWords(2, "+-2", "+-1", "0", "+1", "+2")
 	serviceCmd.AddCommand(serviceScaleCmd)
 }
 

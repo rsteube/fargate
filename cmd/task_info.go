@@ -39,6 +39,7 @@ times.`,
 }
 
 func init() {
+	taskInfoCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_task")
 	taskCmd.AddCommand(taskInfoCmd)
 
 	taskInfoCmd.Flags().StringSliceVarP(&flagTaskInfoTasks, "task", "t", []string{}, "Get info for specific task instances (can be specified multiple times)")

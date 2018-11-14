@@ -55,5 +55,6 @@ any other AWS resources.`,
 }
 
 func init() {
+	certificateDestroyCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateDestroyCmd)
 }

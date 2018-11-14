@@ -29,6 +29,7 @@ var taskPsCmd = &cobra.Command{
 }
 
 func init() {
+	taskPsCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_task")
 	taskCmd.AddCommand(taskPsCmd)
 }
 

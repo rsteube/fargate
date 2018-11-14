@@ -79,10 +79,14 @@ At least one of --cpu or --memory must be specified.`,
 }
 
 func init() {
+	serviceUpdateCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceUpdateCmd)
 
 	serviceUpdateCmd.Flags().StringVarP(&flagServiceUpdateCpu, "cpu", "c", "", "Amount of cpu units to allocate for each task")
 	serviceUpdateCmd.Flags().StringVarP(&flagServiceUpdateMemory, "memory", "m", "", "Amount of MiB to allocate for each task")
+
+	serviceUpdateCmd.MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	serviceUpdateCmd.MarkFlagCustom("memory", "__fargate_completion_memory")
 }
 
 func updateService(operation *ServiceUpdateOperation) {

@@ -41,6 +41,10 @@ HEAD commit. If not, a timestamp in the format of YYYYMMDDHHMMSS will be used.`,
 func init() {
 	serviceDeployCmd.Flags().StringVarP(&flagServiceDeployImage, "image", "i", "", "Docker image to run in the service; if omitted Fargate will build an image from the Dockerfile in the current directory")
 
+	serviceDeployCmd.MarkFlagCustom("image", "__fargate_completion_image")
+
+	serviceDeployCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
+
 	serviceCmd.AddCommand(serviceDeployCmd)
 }
 

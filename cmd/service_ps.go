@@ -29,6 +29,7 @@ var servicePsCmd = &cobra.Command{
 }
 
 func init() {
+	servicePsCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(servicePsCmd)
 }
 

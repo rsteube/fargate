@@ -300,5 +300,12 @@ func init() {
 	lbCreateCmd.Flags().StringSliceVar(&lbCreateFlags.subnetIDs, "subnet-id", []string{},
 		"ID of a subnet to place the load balancer (can be specified multiple times)")
 
+	lbCreateCmd.MarkFlagCustom("certificate", "__fargate_completion_certificate")
+	lbCreateCmd.MarkFlagCustom("port", "__fargate_completion_port")
+	lbCreateCmd.MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	lbCreateCmd.MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+
+	lbCreateCmd.MarkZshCompPositionalArgumentCustom(1, "()")
+
 	lbCmd.AddCommand(lbCreateCmd)
 }

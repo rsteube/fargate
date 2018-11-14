@@ -71,5 +71,6 @@ ownership.`,
 }
 
 func init() {
+	certificateInfoCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateInfoCmd)
 }

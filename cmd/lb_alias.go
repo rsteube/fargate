@@ -77,5 +77,7 @@ create this record.  `,
 }
 
 func init() {
+	lbAliasCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
+	lbAliasCmd.MarkZshCompPositionalArgumentCustom(2, "__fargate_completion_zone")
 	lbCmd.AddCommand(lbAliasCmd)
 }

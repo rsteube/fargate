@@ -30,6 +30,7 @@ In order to destroy a service, it must first be scaled to 0 running tasks.`,
 }
 
 func init() {
+	serviceDestroyCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceDestroyCmd)
 }
 

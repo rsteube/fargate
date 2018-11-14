@@ -117,5 +117,9 @@ func init() {
 	certificateImportCmd.Flags().StringVar(&certificateImportFlags.chain, "chain", "",
 		"Filename of intermediate certificate chain")
 
+	certificateImportCmd.MarkFlagFilename("certificate", "*.cert")
+	certificateImportCmd.MarkFlagFilename("key", "*.key")
+	certificateImportCmd.MarkFlagFilename("chain", "*")
+
 	certificateCmd.AddCommand(certificateImportCmd)
 }

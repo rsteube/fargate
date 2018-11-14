@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	ECS "github.com/jpignata/fargate/ecs"
 	"github.com/spf13/cobra"
 )
@@ -24,6 +25,7 @@ var serviceEnvListCmd = &cobra.Command{
 }
 
 func init() {
+	serviceEnvListCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceEnvCmd.AddCommand(serviceEnvListCmd)
 }
 

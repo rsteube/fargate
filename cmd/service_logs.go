@@ -62,6 +62,7 @@ to search for log messages that include all terms.`,
 }
 
 func init() {
+	serviceLogsCmd.MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_log /fargate/service/")
 	serviceCmd.AddCommand(serviceLogsCmd)
 
 	serviceLogsCmd.Flags().BoolVarP(&flagServiceLogsFollow, "follow", "f", false, "Poll logs and continuously print new events")

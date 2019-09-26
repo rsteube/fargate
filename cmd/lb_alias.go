@@ -4,6 +4,7 @@ import (
 	"github.com/awslabs/fargatecli/elbv2"
 	"github.com/awslabs/fargatecli/route53"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type lbAliasOperation struct {
@@ -77,5 +78,7 @@ create this record.  `,
 }
 
 func init() {
+	zsh.Wrap(lbAliasCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
+	zsh.Wrap(lbAliasCmd).MarkZshCompPositionalArgumentCustom(2, "__fargate_completion_zone")
 	lbCmd.AddCommand(lbAliasCmd)
 }

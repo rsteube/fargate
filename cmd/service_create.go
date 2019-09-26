@@ -15,6 +15,7 @@ import (
 	"github.com/awslabs/fargatecli/git"
 	IAM "github.com/awslabs/fargatecli/iam"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 const typeService = "service"
@@ -279,7 +280,20 @@ func init() {
 	serviceCreateCmd.Flags().StringSliceVar(&flagServiceCreateSubnetIds, "subnet-id", []string{}, "ID of a subnet in which to place the service (can be specified multiple times)")
 	serviceCreateCmd.Flags().StringVarP(&flagServiceCreateTaskRole, "task-role", "", "", "Name or ARN of an IAM role that the service's tasks can assume")
 	serviceCreateCmd.Flags().StringSliceVar(&flagServiceCreateTaskCommand, "task-command", []string{}, "Command to run inside container instead of the one specified in the docker image")
-  serviceCreateCmd.Flags().BoolVarP(&flagServiceAssignPublicIP, "assign-public-ip", "", true, "Assign public ip address")
+  	serviceCreateCmd.Flags().BoolVarP(&flagServiceAssignPublicIP, "assign-public-ip", "", true, "Assign public ip address")
+
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("memory", "__fargate_completion_memory")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("port", "__fargate_completion_port")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("image", "__fargate_completion_image")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("lb", "__fargate_completion_loadbalancer")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("rule", "(host= path=)")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+	zsh.Wrap(serviceCreateCmd).MarkFlagCustom("task-role", "__fargate_completion_role")
+
+	zsh.Wrap(serviceCreateCmd).MarkZshCompPositionalArgumentCustom(1, "()")	
+
 	serviceCmd.AddCommand(serviceCreateCmd)
 }
 

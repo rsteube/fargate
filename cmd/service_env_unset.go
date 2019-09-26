@@ -6,6 +6,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceEnvUnsetOperation struct {
@@ -46,6 +47,8 @@ var flagServiceEnvUnsetKeys []string
 
 func init() {
 	serviceEnvUnsetCmd.Flags().StringSliceVarP(&flagServiceEnvUnsetKeys, "key", "k", []string{}, "Environment variable keys to unset [e.g. KEY, NGINX_PORT]")
+
+	zsh.Wrap(serviceEnvUnsetCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 
 	serviceEnvCmd.AddCommand(serviceEnvUnsetCmd)
 }

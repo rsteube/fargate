@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/awslabs/fargatecli/acm"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type certificateRequestOperation struct {
@@ -86,5 +87,6 @@ func init() {
 	certificateRequestCmd.Flags().StringSliceVarP(&certificateRequestFlags.aliases, "alias", "a", []string{},
 		`Additional domain names to be included in the certificate (can be specified multiple times)`)
 
+	zsh.Wrap(certificateRequestCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_zone")
 	certificateCmd.AddCommand(certificateRequestCmd)
 }

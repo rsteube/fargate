@@ -6,6 +6,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceUpdateOperation struct {
@@ -79,10 +80,14 @@ At least one of --cpu or --memory must be specified.`,
 }
 
 func init() {
+	zsh.Wrap(serviceUpdateCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceUpdateCmd)
 
 	serviceUpdateCmd.Flags().StringVarP(&flagServiceUpdateCpu, "cpu", "c", "", "Amount of cpu units to allocate for each task")
 	serviceUpdateCmd.Flags().StringVarP(&flagServiceUpdateMemory, "memory", "m", "", "Amount of MiB to allocate for each task")
+
+	zsh.Wrap(serviceUpdateCmd).MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	zsh.Wrap(serviceUpdateCmd).MarkFlagCustom("memory", "__fargate_completion_memory")
 }
 
 func updateService(operation *ServiceUpdateOperation) {

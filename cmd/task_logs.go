@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 var (
@@ -60,6 +61,7 @@ to search for log messages that include all terms.`,
 }
 
 func init() {
+	zsh.Wrap(taskLogsCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_log /fargate/task/")
 	taskCmd.AddCommand(taskLogsCmd)
 
 	taskLogsCmd.Flags().BoolVarP(&flagTaskLogsFollow, "follow", "f", false, "Poll logs and continuously print new events")

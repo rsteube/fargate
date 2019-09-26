@@ -9,6 +9,7 @@ import (
 	EC2 "github.com/awslabs/fargatecli/ec2"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceProcessListOperation struct {
@@ -29,6 +30,7 @@ var servicePsCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(servicePsCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(servicePsCmd)
 }
 

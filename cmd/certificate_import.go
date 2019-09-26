@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"io/ioutil"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 
 	"github.com/awslabs/fargatecli/acm"
 	"github.com/spf13/cobra"
@@ -116,6 +117,10 @@ func init() {
 		"Filename of the private key used to generate the certificate")
 	certificateImportCmd.Flags().StringVar(&certificateImportFlags.chain, "chain", "",
 		"Filename of intermediate certificate chain")
+
+	zsh.Wrap(certificateImportCmd).MarkFlagFilename("certificate", "*.cert")
+	zsh.Wrap(certificateImportCmd).MarkFlagFilename("key", "*.key")
+	zsh.Wrap(certificateImportCmd).MarkFlagFilename("chain", "*")
 
 	certificateCmd.AddCommand(certificateImportCmd)
 }

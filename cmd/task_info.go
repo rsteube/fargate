@@ -8,6 +8,7 @@ import (
 	EC2 "github.com/awslabs/fargatecli/ec2"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type TaskInfoOperation struct {
@@ -39,6 +40,7 @@ times.`,
 }
 
 func init() {
+	zsh.Wrap(taskInfoCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_task")
 	taskCmd.AddCommand(taskInfoCmd)
 
 	taskInfoCmd.Flags().StringSliceVarP(&flagTaskInfoTasks, "task", "t", []string{}, "Get info for specific task instances (can be specified multiple times)")

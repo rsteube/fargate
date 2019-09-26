@@ -5,6 +5,7 @@ import (
 
 	"github.com/awslabs/fargatecli/acm"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type certificateInfoOperation struct {
@@ -71,5 +72,6 @@ ownership.`,
 }
 
 func init() {
+	zsh.Wrap(certificateInfoCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateInfoCmd)
 }

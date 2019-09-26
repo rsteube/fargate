@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/fargatecli/git"
 	IAM "github.com/awslabs/fargatecli/iam"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 const typeTask string = "task"
@@ -144,6 +145,16 @@ func init() {
 	taskRunCmd.Flags().StringSliceVar(&flagTaskRunSubnetIds, "subnet-id", []string{}, "ID of a subnet in which to place the task (can be specified multiple times)")
 	taskRunCmd.Flags().StringVarP(&flagTaskRunTaskRole, "task-role", "", "", "Name or ARN of an IAM role that the tasks can assume")
 	taskRunCmd.Flags().StringSliceVar(&flagTaskRunTaskCommand, "task-command", []string{}, "Command to run inside container instead of the one specified in the docker image")
+
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("cpu", "__fargate_completion_cpu")
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("image", "__fargate_completion_image")
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("memory", "__fargate_completion_memory")
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+	zsh.Wrap(taskRunCmd).MarkFlagCustom("task-role", "__fargate_completion_role")
+
+	zsh.Wrap(taskRunCmd).MarkZshCompPositionalArgumentCustom(1, "()")	
+
 	taskCmd.AddCommand(taskRunCmd)
 }
 

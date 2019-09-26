@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/awslabs/fargatecli/acm"
 	"github.com/spf13/cobra"
+ 	zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type certificateDestroyOperation struct {
@@ -55,5 +56,6 @@ any other AWS resources.`,
 }
 
 func init() {
+	zsh.Wrap(certificateDestroyCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateDestroyCmd)
 }

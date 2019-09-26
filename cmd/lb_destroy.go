@@ -6,6 +6,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ELBV2 "github.com/awslabs/fargatecli/elbv2"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type LoadBalancerDestroyOperation struct {
@@ -26,6 +27,7 @@ var loadBalancerDestroyCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(loadBalancerDestroyCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
 	lbCmd.AddCommand(loadBalancerDestroyCmd)
 }
 

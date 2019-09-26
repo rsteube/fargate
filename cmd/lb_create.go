@@ -7,6 +7,7 @@ import (
 	"github.com/awslabs/fargatecli/ec2"
 	"github.com/awslabs/fargatecli/elbv2"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type lbCreateOperation struct {
@@ -306,6 +307,13 @@ func init() {
 		"ID of a subnet to place the load balancer (can be specified multiple times)")
 	lbCreateCmd.Flags().StringVarP(&lbCreateFlags.scheme, "scheme", "s", "internet-facing",
 		"Scheme of the load balancer")
+
+	zsh.Wrap(lbCreateCmd).MarkFlagCustom("certificate", "__fargate_completion_certificate")
+	zsh.Wrap(lbCreateCmd).MarkFlagCustom("port", "__fargate_completion_port")
+	zsh.Wrap(lbCreateCmd).MarkFlagCustom("security-group-id", "__fargate_completion_securitygroup")
+	zsh.Wrap(lbCreateCmd).MarkFlagCustom("subnet-id", "__fargate_completion_subnet")
+
+	zsh.Wrap(lbCreateCmd).MarkZshCompPositionalArgumentCustom(1, "()")
 
 	lbCmd.AddCommand(lbCreateCmd)
 }

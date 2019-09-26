@@ -4,6 +4,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceRestartOperation struct {
@@ -29,6 +30,7 @@ for example.`,
 }
 
 func init() {
+	zsh.Wrap(serviceRestartCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceRestartCmd)
 }
 

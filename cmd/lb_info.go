@@ -12,6 +12,7 @@ import (
 	ECS "github.com/awslabs/fargatecli/ecs"
 	ELBV2 "github.com/awslabs/fargatecli/elbv2"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type LbInfoOperation struct {
@@ -32,6 +33,7 @@ var lbInfoCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(lbInfoCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_loadbalancer")
 	lbCmd.AddCommand(lbInfoCmd)
 }
 

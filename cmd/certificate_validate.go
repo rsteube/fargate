@@ -6,6 +6,7 @@ import (
 	"github.com/awslabs/fargatecli/acm"
 	"github.com/awslabs/fargatecli/route53"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type certificateValidateOperation struct {
@@ -97,5 +98,6 @@ created to complete validation and issue the certificate.`,
 }
 
 func init() {
+	zsh.Wrap(certificateValidateCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_certificate")
 	certificateCmd.AddCommand(certificateValidateCmd)
 }

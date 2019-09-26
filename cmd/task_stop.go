@@ -4,6 +4,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type TaskStopOperation struct {
@@ -35,9 +36,12 @@ var taskStopCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(taskStopCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_task")
 	taskCmd.AddCommand(taskStopCmd)
 
 	taskStopCmd.Flags().StringSliceVarP(&flagTaskStopTasks, "task", "t", []string{}, "Stop specific task instances (can be specified multiple times)")
+
+	zsh.Wrap(taskStopCmd).MarkFlagCustom("task", "__fargate_completion_taskid")
 }
 
 func stopTasks(operation *TaskStopOperation) {

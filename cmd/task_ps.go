@@ -9,6 +9,7 @@ import (
 	EC2 "github.com/awslabs/fargatecli/ec2"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type TaskProcessListOperation struct {
@@ -29,6 +30,7 @@ var taskPsCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(taskPsCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_task")
 	taskCmd.AddCommand(taskPsCmd)
 }
 

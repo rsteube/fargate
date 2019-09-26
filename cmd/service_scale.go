@@ -8,6 +8,7 @@ import (
 	"github.com/awslabs/fargatecli/console"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 const validScalePattern = "[-\\+]?[0-9]+"
@@ -66,6 +67,8 @@ specified with a sign such as +5 or -2.`,
 }
 
 func init() {
+	zsh.Wrap(serviceScaleCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
+	zsh.Wrap(serviceScaleCmd).MarkZshCompPositionalArgumentWords(2, "+-2", "+-1", "0", "+1", "+2")
 	serviceCmd.AddCommand(serviceScaleCmd)
 }
 

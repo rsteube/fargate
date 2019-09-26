@@ -13,6 +13,7 @@ import (
 	ECS "github.com/awslabs/fargatecli/ecs"
 	ELBV2 "github.com/awslabs/fargatecli/elbv2"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 const statusActive = "ACTIVE"
@@ -43,6 +44,7 @@ update to configuration such a CPU, memory, or environment variables.`,
 }
 
 func init() {
+	zsh.Wrap(serviceInfoCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceInfoCmd)
 }
 

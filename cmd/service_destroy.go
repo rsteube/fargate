@@ -7,6 +7,7 @@ import (
 	ECS "github.com/awslabs/fargatecli/ecs"
 	ELBV2 "github.com/awslabs/fargatecli/elbv2"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceDestroyOperation struct {
@@ -30,6 +31,7 @@ In order to destroy a service, it must first be scaled to 0 running tasks.`,
 }
 
 func init() {
+	zsh.Wrap(serviceDestroyCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceCmd.AddCommand(serviceDestroyCmd)
 }
 

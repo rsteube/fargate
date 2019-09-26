@@ -4,6 +4,7 @@ import (
 	"fmt"
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceEnvListOperation struct {
@@ -24,6 +25,7 @@ var serviceEnvListCmd = &cobra.Command{
 }
 
 func init() {
+	zsh.Wrap(serviceEnvListCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 	serviceEnvCmd.AddCommand(serviceEnvListCmd)
 }
 

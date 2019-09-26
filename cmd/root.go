@@ -14,6 +14,7 @@ import (
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/ssh/terminal"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 const (
@@ -56,7 +57,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "fargate",
+	Use:   "fargatecli",
 	Short: "Deploy serverless containers onto the cloud from your command line",
 	Long: `Deploy serverless containers onto the cloud from your command line
 
@@ -150,6 +151,7 @@ CloudWatch Logs, and Amazon Route 53 into an easy-to-use CLI.`,
 			}
 		}
 	},
+	BashCompletionFunction: bashCompletionFunction,
 }
 
 func Execute() {
@@ -162,6 +164,10 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&region, "region", "", `AWS region (default "us-east-1")`)
 	rootCmd.PersistentFlags().BoolVar(&noColor, "no-color", false, "Disable color output")
 	rootCmd.PersistentFlags().StringVar(&clusterName, "cluster", "", `ECS cluster name (default "fargate")`)
+
+	// TODO not yet rendered
+	zsh.Wrap(rootCmd).MarkPFlagCustom("region", "__fargate_completion_region")
+	zsh.Wrap(rootCmd).MarkPFlagCustom("cluster", "__fargate_completion_cluster")
 
 	if runtime.GOOS == runtimeMacOS {
 		rootCmd.PersistentFlags().BoolVar(&noEmoji, "no-emoji", false, "Disable emoji output")

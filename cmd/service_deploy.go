@@ -7,6 +7,7 @@ import (
 	ECS "github.com/awslabs/fargatecli/ecs"
 	"github.com/awslabs/fargatecli/git"
 	"github.com/spf13/cobra"
+	 zsh "github.com/rsteube/cobra-zsh-gen"
 )
 
 type ServiceDeployOperation struct {
@@ -40,6 +41,10 @@ HEAD commit. If not, a timestamp in the format of YYYYMMDDHHMMSS will be used.`,
 
 func init() {
 	serviceDeployCmd.Flags().StringVarP(&flagServiceDeployImage, "image", "i", "", "Docker image to run in the service; if omitted Fargate will build an image from the Dockerfile in the current directory")
+
+	zsh.Wrap(serviceDeployCmd).MarkFlagCustom("image", "__fargate_completion_image")
+
+	zsh.Wrap(serviceDeployCmd).MarkZshCompPositionalArgumentCustom(1, "__fargate_completion_service")
 
 	serviceCmd.AddCommand(serviceDeployCmd)
 }
